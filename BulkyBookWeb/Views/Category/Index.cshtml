@@ -1,0 +1,86 @@
+﻿@{
+    ViewData["Title"] = "Category List";
+}
+
+<div class="container-fluid">
+    @{
+        string? message = null;
+        string alertClass = "";
+
+        if (TempData["Success"] != null)
+        {
+            message = TempData["Success"]?.ToString();
+            alertClass = "alert-success";
+        }
+        else if (TempData["Update"] != null)
+        {
+            message = TempData["Update"]?.ToString();
+            alertClass = "alert-warning";
+        }
+        else if (TempData["Delete"] != null)
+        {
+            message = TempData["Delete"]?.ToString();
+            alertClass = "alert-danger";
+        }
+    }
+
+    @if (message != null)
+    {
+        <div id="successAlert" class="alert @alertClass alert-dismissible fade show" role="alert">
+            @message
+            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+        </div>
+    }
+
+    <div class="card border shadow-sm overflow-hidden">
+        <div class="card-header text-white py-3 px-4 d-flex align-items-center justify-content-between" style="background: linear-gradient(to right, #065f46, #282828, #191414);">
+            <div>
+                <h5 class="mb-0 fw-bold"><i class="bi bi-grid me-2"></i>Categories</h5>
+                <p class="mb-0 small" style="color: #1DB954;">Manage your product categories</p>
+            </div>
+            <a asp-controller="Category" asp-action="Create" class="btn btn-sm btn-outline-light fw-semibold d-inline-flex align-items-center gap-1">
+                <i class="bi bi-plus-lg"></i> New Category
+            </a>
+        </div>
+        <div class="table-responsive">
+            <table class="table-styled">
+                <thead>
+                    <tr>
+                        <th>Category Name</th>
+                        <th>Display Order</th>
+                        <th class="text-end">Actions</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <!-- Sample Row - Students will replace with @@foreach loop -->
+                     @if (Model != null && Model?.Count > 0)
+                    {
+                        @foreach (var data in Model)
+                        {
+                            <tr>
+                                <td class="fw-medium" style="color: #1e293b;">@data.Name</td>
+                                <td><span class="badge bg-light text-dark border">@data.DisplayOrder</span></td>
+                                <td class="text-end">
+                                    <a asp-action="Update"
+                                        asp-route-id="@data.Id"
+                                        class="btn btn-sm btn-outline-success me-1">
+                                        <i class="bi bi-pencil-square me-1"></i>
+                                        <span class="d-none d-md-inline">Edit</span>
+                                    </a>
+
+                                    <a asp-action="Delete"
+                                       asp-route-id="@data.Id"
+                                       class="btn btn-sm btn-outline-danger">
+                                       <i class="bi bi-trash me-1"></i>
+                                       <span class="d-none d-md-inline">Delete</span>
+                                    </a>
+                                </td>
+                            </tr>
+                        }
+                    }
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
+
