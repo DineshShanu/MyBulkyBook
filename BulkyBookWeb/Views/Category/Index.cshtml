@@ -3,35 +3,6 @@
 }
 
 <div class="container-fluid">
-    @{
-        string? message = null;
-        string alertClass = "";
-
-        if (TempData["Success"] != null)
-        {
-            message = TempData["Success"]?.ToString();
-            alertClass = "alert-success";
-        }
-        else if (TempData["Update"] != null)
-        {
-            message = TempData["Update"]?.ToString();
-            alertClass = "alert-warning";
-        }
-        else if (TempData["Delete"] != null)
-        {
-            message = TempData["Delete"]?.ToString();
-            alertClass = "alert-danger";
-        }
-    }
-
-    @if (message != null)
-    {
-        <div id="successAlert" class="alert @alertClass alert-dismissible fade show" role="alert">
-            @message
-            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
-        </div>
-    }
-
     <div class="card border shadow-sm overflow-hidden">
         <div class="card-header text-white py-3 px-4 d-flex align-items-center justify-content-between" style="background: linear-gradient(to right, #065f46, #282828, #191414);">
             <div>

@@ -8,11 +8,11 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
 
-namespace BulkyBookWeb.Migrations
+namespace BulkyBook.DataAccess.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20261025114422_SeedCategoryTable")]
-    partial class SeedCategoryTable
+    [Migration("20261101141622_AddValidationRange")]
+    partial class AddValidationRange
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -32,9 +32,13 @@ namespace BulkyBookWeb.Migrations
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
 
+                    b.Property<int>("DisplayOrder")
+                        .HasColumnType("int");
+
                     b.Property<string>("Name")
                         .IsRequired()
-                        .HasColumnType("nvarchar(max)");
+                        .HasMaxLength(100)
+                        .HasColumnType("nvarchar(100)");
 
                     b.HasKey("Id");
 
@@ -44,16 +48,19 @@ namespace BulkyBookWeb.Migrations
                         new
                         {
                             Id = 1,
+                            DisplayOrder = 1,
                             Name = "Action"
                         },
                         new
                         {
                             Id = 2,
+                            DisplayOrder = 2,
                             Name = "SciFi"
                         },
                         new
                         {
                             Id = 3,
+                            DisplayOrder = 3,
                             Name = "History"
                         });
                 });

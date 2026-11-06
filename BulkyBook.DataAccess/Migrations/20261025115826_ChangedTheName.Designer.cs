@@ -8,11 +8,11 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
 
-namespace BulkyBookWeb.Migrations
+namespace BulkyBook.DataAccess.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20261025120301_ChangedColumnName")]
-    partial class ChangedColumnName
+    [Migration("20261025115826_ChangedTheName")]
+    partial class ChangedTheName
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -32,12 +32,12 @@ namespace BulkyBookWeb.Migrations
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
 
-                    b.Property<int>("DisplayOrder")
-                        .HasColumnType("int");
-
                     b.Property<string>("Name")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
+
+                    b.Property<int>("Order")
+                        .HasColumnType("int");
 
                     b.HasKey("Id");
 
@@ -47,20 +47,20 @@ namespace BulkyBookWeb.Migrations
                         new
                         {
                             Id = 1,
-                            DisplayOrder = 1,
-                            Name = "Action"
+                            Name = "Action",
+                            Order = 0
                         },
                         new
                         {
                             Id = 2,
-                            DisplayOrder = 2,
-                            Name = "SciFi"
+                            Name = "SciFi",
+                            Order = 0
                         },
                         new
                         {
                             Id = 3,
-                            DisplayOrder = 3,
-                            Name = "History"
+                            Name = "History",
+                            Order = 0
                         });
                 });
 #pragma warning restore 612, 618

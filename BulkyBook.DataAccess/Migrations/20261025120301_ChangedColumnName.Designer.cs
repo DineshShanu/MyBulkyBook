@@ -8,11 +8,11 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
 
-namespace BulkyBookWeb.Migrations
+namespace BulkyBook.DataAccess.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20261025115442_AddedOwnerColumnInCategory")]
-    partial class AddedOwnerColumnInCategory
+    [Migration("20261025120301_ChangedColumnName")]
+    partial class ChangedColumnName
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -32,11 +32,10 @@ namespace BulkyBookWeb.Migrations
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
 
-                    b.Property<string>("Name")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
+                    b.Property<int>("DisplayOrder")
+                        .HasColumnType("int");
 
-                    b.Property<string>("Owner")
+                    b.Property<string>("Name")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
@@ -48,20 +47,20 @@ namespace BulkyBookWeb.Migrations
                         new
                         {
                             Id = 1,
-                            Name = "Action",
-                            Owner = ""
+                            DisplayOrder = 1,
+                            Name = "Action"
                         },
                         new
                         {
                             Id = 2,
-                            Name = "SciFi",
-                            Owner = ""
+                            DisplayOrder = 2,
+                            Name = "SciFi"
                         },
                         new
                         {
                             Id = 3,
-                            Name = "History",
-                            Owner = ""
+                            DisplayOrder = 3,
+                            Name = "History"
                         });
                 });
 #pragma warning restore 612, 618

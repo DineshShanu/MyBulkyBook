@@ -8,11 +8,11 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
 
-namespace BulkyBookWeb.Migrations
+namespace BulkyBook.DataAccess.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20261025120026_SeedeOrder")]
-    partial class SeedeOrder
+    [Migration("20261025115442_AddedOwnerColumnInCategory")]
+    partial class AddedOwnerColumnInCategory
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -36,8 +36,9 @@ namespace BulkyBookWeb.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<int>("Order")
-                        .HasColumnType("int");
+                    b.Property<string>("Owner")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
 
                     b.HasKey("Id");
 
@@ -48,19 +49,19 @@ namespace BulkyBookWeb.Migrations
                         {
                             Id = 1,
                             Name = "Action",
-                            Order = 1
+                            Owner = ""
                         },
                         new
                         {
                             Id = 2,
                             Name = "SciFi",
-                            Order = 2
+                            Owner = ""
                         },
                         new
                         {
                             Id = 3,
                             Name = "History",
-                            Order = 3
+                            Owner = ""
                         });
                 });
 #pragma warning restore 612, 618

@@ -3,19 +3,16 @@ using BulkyBookWeb.Data;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
-using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
 
-namespace BulkyBookWeb.Migrations
+namespace BulkyBook.DataAccess.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20261025115826_ChangedTheName")]
-    partial class ChangedTheName
+    partial class ApplicationDbContextModelSnapshot : ModelSnapshot
     {
-        /// <inheritdoc />
-        protected override void BuildTargetModel(ModelBuilder modelBuilder)
+        protected override void BuildModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -32,12 +29,13 @@ namespace BulkyBookWeb.Migrations
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
 
+                    b.Property<int>("DisplayOrder")
+                        .HasColumnType("int");
+
                     b.Property<string>("Name")
                         .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<int>("Order")
-                        .HasColumnType("int");
+                        .HasMaxLength(100)
+                        .HasColumnType("nvarchar(100)");
 
                     b.HasKey("Id");
 
@@ -47,20 +45,20 @@ namespace BulkyBookWeb.Migrations
                         new
                         {
                             Id = 1,
-                            Name = "Action",
-                            Order = 0
+                            DisplayOrder = 1,
+                            Name = "Action"
                         },
                         new
                         {
                             Id = 2,
-                            Name = "SciFi",
-                            Order = 0
+                            DisplayOrder = 2,
+                            Name = "SciFi"
                         },
                         new
                         {
                             Id = 3,
-                            Name = "History",
-                            Order = 0
+                            DisplayOrder = 3,
+                            Name = "History"
                         });
                 });
 #pragma warning restore 612, 618
